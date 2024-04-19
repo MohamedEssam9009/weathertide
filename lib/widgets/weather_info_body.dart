@@ -24,7 +24,7 @@ class WeatherInfoBody extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 32,
+            height: 32
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,10 +58,10 @@ class WeatherInfoBody extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 32,
+            height: 32
           ),
           const Text(
-            'Ligh Rain',
+            'Light Rain',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32,

@@ -33,3 +33,10 @@ class HomeView extends StatelessWidget {
     );
   }
 }
+
+ // 1. Create States 
+ // 2. Create Cubit 
+ // 3. Create Function 
+ // 4. Provide Cubit
+ // 5. integrate Cubit
+ // 6. Trigger Cubit

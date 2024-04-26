@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/cubits/get_weather_cubit/get_weather_cubit.dart';
+
 import 'views/home_view.dart';
 
 void main() {
@@ -14,95 +15,131 @@ class WeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GetWeatherCubit(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(useMaterial3: false, primarySwatch: getThemeColor()),
-        home: const HomeView(),
-      ),
+      child: const CustomMaterialApp(),
     );
   }
+}
 
-  MaterialColor getThemeColor(String condition) {
-    switch (condition) {
-      case 'Sunny':
-        return Colors.orange;
-      case 'Clear':
-        return Colors.yellow;
-      case 'Partly cloudy':
-        return Colors.lightBlue;
-      case 'Cloudy':
-        return Colors.grey;
-      case 'Overcast':
-        return Colors.blueGrey;
-      case 'Mist':
-        return Colors.indigo;
-      case 'Patchy rain possible':
-      case 'Patchy snow possible':
-      case 'Patchy sleet possible':
-      case 'Patchy freezing drizzle possible':
-      case 'Thundery outbreaks possible':
-        return Colors.deepPurple;
-      case 'Blowing snow':
-      case 'Blizzard':
-      case 'Fog':
-        return Colors.grey;
-      case 'Freezing fog':
-        return Colors.grey;
-      case 'Patchy light drizzle':
-        return Colors.lightBlue;
-      case 'Light drizzle':
-        return Colors.lightBlue;
-      case 'Freezing drizzle':
-        return Colors.lightBlue;
-      case 'Heavy freezing drizzle':
-        return Colors.lightBlue;
-      case 'Patchy light rain':
-        return Colors.lightBlue;
-      case 'Light rain':
-        return Colors.lightBlue;
-      case 'Moderate rain at times':
-        return Colors.lightBlue;
-      case 'Moderate rain':
-        return Colors.lightBlue;
-      case 'Heavy rain at times':
-        return Colors.lightBlue;
-      case 'Heavy rain':
-        return Colors.lightBlue;
-      case 'Light freezing rain':
-        return Colors.lightBlue;
-      case 'Moderate or heavy freezing rain':
-        return Colors.lightBlue;
-      case 'Light sleet':
-      case 'Moderate or heavy sleet':
-      case 'Patchy light snow':
-      case 'Light snow':
-      case 'Patchy moderate snow':
-      case 'Moderate snow':
-      case 'Patchy heavy snow':
-      case 'Heavy snow':
-      case 'Ice pellets':
-      case 'Light rain shower':
-        return Colors.lightBlue;
-      case 'Moderate or heavy rain shower':
-        return Colors.lightBlue;
-      case 'Torrential rain shower':
-        return Colors.lightBlue;
-      case 'Light sleet showers':
-      case 'Moderate or heavy sleet showers':
-      case 'Light snow showers':
-      case 'Moderate or heavy snow showers':
-      case 'Light showers of ice pellets':
-      case 'Moderate or heavy showers of ice pellets':
-      case 'Patchy light rain with thunder':
-        return Colors.deepPurple;
-      case 'Moderate or heavy rain with thunder':
-        return Colors.deepPurple;
-      case 'Patchy light snow with thunder':
-        return Colors.deepPurple;
-      case 'Moderate or heavy snow with thunder':
-        return Colors.deepPurple;
-      default:
-        return Colors.grey;
-    }
+class CustomMaterialApp extends StatelessWidget {
+  const CustomMaterialApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          useMaterial3: false,
+          primarySwatch: getThemeColor(BlocProvider.of<GetWeatherCubit>(context)
+              .weatherModel
+              ?.weatherCondition)),
+      home: const HomeView(),
+    );
+  }
+}
+
+MaterialColor getThemeColor(String? condition) {
+  if (condition == null) {
+    return Colors.blue;
+  }
+
+  switch (condition) {
+    case 'Sunny':
+      return Colors.amber;
+    case 'Partly cloudy':
+      return Colors.orange;
+    case 'cloudy':
+      return Colors.grey;
+    case 'overcast':
+      return Colors.grey;
+    case 'mist':
+      return Colors.grey;
+    case 'patchy rain possible':
+      return Colors.deepPurple;
+    case 'patchy snow possible':
+      return Colors.blue;
+    case 'patchy sleet possible':
+      return Colors.blue;
+    case 'patchy freezing drizzle possible':
+      return Colors.blue;
+    case 'thundery outbreaks possible':
+      return Colors.deepPurple;
+    case 'blowing snow':
+      return Colors.blue;
+    case 'blizzard':
+      return Colors.blue;
+    case 'fog':
+      return Colors.grey;
+    case 'freezing fog':
+      return Colors.grey;
+    case 'patchy light drizzle':
+      return Colors.grey;
+    case 'light drizzle':
+      return Colors.grey;
+    case 'freezing drizzle':
+      return Colors.blue;
+    case 'heavy freezing drizzle':
+      return Colors.blue;
+    case 'patchy light rain':
+      return Colors.cyan;
+    case 'light rain':
+      return Colors.lightBlue;
+    case 'moderate rain at times':
+      return Colors.deepPurple;
+    case 'Moderate rain':
+      return Colors.cyan;
+    case 'heavy rain at times':
+      return Colors.deepPurple;
+    case 'heavy rain':
+      return Colors.teal;
+    case 'light freezing rain':
+      return Colors.blue;
+    case 'moderate or heavy freezing rain':
+      return Colors.blue;
+    case 'light sleet':
+      return Colors.blue;
+    case 'moderate or heavy sleet':
+      return Colors.blue;
+    case 'patchy light snow':
+      return Colors.blue;
+    case 'light snow':
+      return Colors.blue;
+    case 'patchy moderate snow':
+      return Colors.blue;
+    case 'moderate snow':
+      return Colors.blue;
+    case 'patchy heavy snow':
+      return Colors.blue;
+    case 'heavy snow':
+      return Colors.blue;
+    case 'ice pellets':
+      return Colors.blue;
+    case 'light rain shower':
+      return Colors.grey;
+    case 'moderate or heavy rain shower':
+      return Colors.deepPurple;
+    case 'torrential rain shower':
+      return Colors.deepPurple;
+    case 'light sleet showers':
+      return Colors.blue;
+    case 'moderate or heavy sleet showers':
+      return Colors.blue;
+    case 'light snow showers':
+      return Colors.blue;
+    case 'moderate or heavy snow showers':
+      return Colors.blue;
+    case 'light showers of ice pellets':
+      return Colors.blue;
+    case 'moderate or heavy showers of ice pellets':
+      return Colors.blue;
+    case 'patchy light rain with thunder':
+      return Colors.deepPurple;
+    case 'moderate or heavy rain with thunder':
+      return Colors.deepPurple;
+    case 'patchy light snow with thunder':
+      return Colors.blue;
+    case 'moderate or heavy snow with thunder':
+      return Colors.blue;
+    default:
+      return Colors.blueGrey; // Default color for unknown conditions
   }
 }

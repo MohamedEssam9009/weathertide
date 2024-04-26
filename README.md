@@ -48,7 +48,7 @@ To get started with this project, follow these steps:
 2. Enter the location you want to check the weather for in the search bar.
 3. View the current weather information and forecast.
 
- ### Contributing
+ ## Contributing
  Contributions are welcome! If you find any issues or want to add new features, feel free to open an issue or submit a pull request.
 
    

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/cubits/get_weather_cubit/get_weather_cubit.dart';
-import 'package:weather_app/models/weather_model.dart';
 
 class WeatherInfoBody extends StatelessWidget {
   const WeatherInfoBody({Key? key}) : super(key: key);
@@ -32,21 +31,25 @@ class WeatherInfoBody extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                'assets/images/cloudy.png',
+              Image.network('https:${weatherModel.image!}'),
+              Text(
+                weatherModel.temp.toString(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32,
+                ),
               ),
-              const CustomTextWidget(),
-              const Column(
+              Column(
                 children: [
                   Text(
-                    'Maxtemp: 24',
-                    style: TextStyle(
+                    'Max Temp: ${weatherModel.maxTemp.round()}',
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
                   Text(
-                    'Mintemp: 16',
-                    style: TextStyle(
+                    'Min Temp: ${weatherModel.minTemp.round()}',
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),
@@ -55,38 +58,14 @@ class WeatherInfoBody extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 32),
-          const CustomWeatherConditionText(),
+          Text(
+            weatherModel.weatherCondition,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 32,
+            ),
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class CustomTextWidget extends StatelessWidget {
-  const CustomTextWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      '17',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
-      ),
-    );
-  }
-}
-
-class CustomWeatherConditionText extends StatelessWidget {
-  const CustomWeatherConditionText({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Light Rain',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
       ),
     );
   }
